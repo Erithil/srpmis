@@ -1,0 +1,168 @@
+
+html, body{
+	margin 0
+	padding 0
+	height 100%
+	font-family 'Microsoft Yahei' Helvetica, 'Hiragino Sans GB', '微软雅黑', Arial, sans-serif
+}
+
+//账号密码
+.balloon {
+  display: inline-block;
+  width: 255px;
+  padding: 10px 0 10px 15px;
+  font-size 15px
+  font-weight: 400
+  color #377D6A
+  background #efefef
+  border 0
+  border-radius: 3px
+  outline: 0
+  text-indent 60px // Arbitrary.
+  transition all .3s ease-in-out
+  
+  &::-webkit-input-placeholder {
+    color: #efefef;
+    text-indent: 0;
+    font-weight: 300;
+  }
+ 
+  + label {
+    display: inline-block;
+    position: absolute;
+    top: 8px;
+    left: 0;
+    bottom: 8px;
+    padding: 3px 15px;
+    color: #032429;
+    font-size: 15px;
+    font-weight: 10;
+    text-transform: uppercase;
+    text-shadow: 0 1px 0 rgba(19,74,70,0);
+    transition: all .3s ease-in-out;
+    border-radius: 3px;
+    background: rgba(122,184,147,0);
+    
+    &:after {
+      position: absolute;
+      content: "";
+      width: 0;
+      height: 0;
+      top: 100%;
+      left: 50%;
+      margin-left: -3px;
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-top: 3px solid rgba(122,184,147,0);
+      transition: all .3s ease-in-out;
+    }
+  }
+}
+.balloon:focus,
+.balloon:active {
+  color: #377D6A;
+  text-indent: 0;
+  background: #fff;
+  
+  &::-webkit-input-placeholder {
+    color: #aaa;
+  }
+  + label {
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(19,74,70,.4);
+    background: rgba(122,184,147,1);
+    transform: translateY(-35px);
+    
+    &:after {
+      border-top: 4px solid rgba(122,184,147,1);
+    }
+  }
+}
+
+//搜索框
+.search__input {
+    width: 300px;
+    padding: 12px 24px;
+    background-color: transparent;
+    transition: transform 250ms ease-in-out;
+    font-size: 14px;
+    line-height: 18px;
+    color: #575756;
+    background-color: transparent;
+    background-image: url(http://mihaeltomic.com/codepen/input-search/ic_search_black_24px.svg);
+    background-repeat: no-repeat;
+    background-size: 18px 18px;
+    background-position: 95% center;
+    border-radius: 50px;
+    border: 1px solid #575756;
+    transition: all 250ms ease-in-out;
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+}
+
+.search__input::placeholder {
+    color: rgba(87, 87, 86, 0.8);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.search__input:hover,
+        .search__input:focus {
+    padding: 12px 0;
+    outline: 0;
+    border: 1px solid transparent;
+    border-bottom: 1px solid #575756;
+    border-radius: 0;
+    background-position: 100% center;
+}
+
+//按钮
+#sub{
+  outline: none;
+  border: none;
+  padding: 20px;
+  display: block;
+  margin: 50px auto;
+  cursor: pointer;
+  font-size: 20px;
+  background-color: transparent;
+  position: relative;
+  border: 2px solid #fff;
+  transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  color: #fff;
+  border-color: transparent;
+}
+
+#sub:before, #sub:after {
+  width: 0;
+  height: 3px;
+  content: " ";
+  background-color: #F44336;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+}
+#sub:after {
+  top: 100%;
+}
+#sub:hover {
+  letter-spacing: 8px;
+  color: #F44336;
+}
+#sub:hover:before, #sub:hover:after {
+  width: 100%;
+  left: 0;
+}
+#sub:hover:after {
+  width: 100%;
+  left: 0;
+}
