@@ -1,8 +1,11 @@
 <template>
   <div class="header">
+    <div class="logo">
+      <img src="@/assets/images/logo.jpg" alt="logo" />
+    </div>
     <div class="content">
-      <p class="zh">科研项目信息管理系统</p>
-      <p class="en">MIS of Scientific Research Project</p>
+      <p class="zh">华南师范大学科研项目信息管理系统</p>
+      <p class="en">MIS of Scientific Research Project for SCNU</p>
     </div>
   </div>
 </template>
@@ -14,9 +17,14 @@
 .header{
   width 100%
   height 80px
-  color #fff
-  background-color #134A46
+  color #000000
+  background-color rgba(160, 238, 225, .2)
   float left
+}
+.logo{
+  float left
+  margin-left 10px
+  margin-right 10px
 }
 .content{
   margin-left 30px

@@ -7,19 +7,20 @@ html, body{
 }
 
 //账号密码
-.balloon {
+.clean-slide {
+  position: relative;
   display: inline-block;
-  width: 255px;
+  width: 215px;
   padding: 10px 0 10px 15px;
-  font-size 15px
-  font-weight: 400
-  color #377D6A
-  background #efefef
-  border 0
-  border-radius: 3px
-  outline: 0
-  text-indent 60px // Arbitrary.
-  transition all .3s ease-in-out
+  font-family: "Open Sans", sans;
+  font-weight: 400;
+  color: #377D6A;
+  background: #efefef;
+  border: 0;
+  border-radius: 3px;
+  outline: 0;
+  text-indent: 60px; // Arbitrary.
+  transition: all .3s ease-in-out;
   
   &::-webkit-input-placeholder {
     color: #efefef;
@@ -30,39 +31,45 @@ html, body{
   + label {
     display: inline-block;
     position: absolute;
-    top: 8px;
+    transform: translateX(0);
+    top: 0;
     left: 0;
-    bottom: 8px;
-    padding: 3px 15px;
-    color: #032429;
-    font-size: 15px;
-    font-weight: 10;
+    bottom: 0;
+    padding: 13px 15px;
+    font-size: 13px;
+    font-weight: 7;
     text-transform: uppercase;
-    text-shadow: 0 1px 0 rgba(19,74,70,0);
-    transition: all .3s ease-in-out;
-    border-radius: 3px;
-    background: rgba(122,184,147,0);
+    color: #000000
+    text-align: left;
+    text-shadow: 0 1px 0 rgba(255,255,255,.4);
+    transition: all .3s ease-in-out, color .3s ease-out;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    overflow: hidden;
     
     &:after {
-      position: absolute;
       content: "";
-      width: 0;
-      height: 0;
-      top: 100%;
-      left: 50%;
-      margin-left: -3px;
-      border-left: 4px solid transparent;
-      border-right: 4px solid transparent;
-      border-top: 3px solid rgba(122,184,147,0);
+      position: absolute;
+      top: 0;
+      right: 100%;
+      bottom: 0;
+      width: 100%;
+      background: rgba(25, 170, 173, 1)
+      z-index: -1;
+      transform: translate(0);
       transition: all .3s ease-in-out;
+      border-top-left-radius: 3px;
+      border-bottom-left-radius: 3px;
     }
   }
 }
-.balloon:focus,
-.balloon:active {
+.clean-slide:focus,
+.clean-slide:active {
   color: #377D6A;
   text-indent: 0;
   background: #fff;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
   
   &::-webkit-input-placeholder {
     color: #aaa;
@@ -70,14 +77,14 @@ html, body{
   + label {
     color: #fff;
     text-shadow: 0 1px 0 rgba(19,74,70,.4);
-    background: rgba(122,184,147,1);
-    transform: translateY(-35px);
+    transform: translateX(-100%);
     
     &:after {
-      border-top: 4px solid rgba(122,184,147,1);
+      transform: translate(100%);
     }
   }
 }
+
 
 //搜索框
 .search__input {
@@ -116,53 +123,43 @@ html, body{
     background-position: 100% center;
 }
 
+
 //按钮
-#sub{
-  outline: none;
-  border: none;
-  padding: 20px;
-  display: block;
-  margin: 50px auto;
-  cursor: pointer;
-  font-size: 20px;
-  background-color: transparent;
-  position: relative;
-  border: 2px solid #fff;
-  transition: all 0.5s ease;
-  -webkit-transition: all 0.5s ease;
-  -moz-transition: all 0.5s ease;
-  -o-transition: all 0.5s ease;
-  -ms-transition: all 0.5s ease;
-  color: #fff;
-  border-color: transparent;
+button{
+  background:rgba(25, 170, 173, 1);
+  color:#fff;
+  border:none;
+  position:relative;
+  height:30px;
+  font-size:17px;
+  padding:0 20px;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+button:hover{
+  background:#fff;
+  color:#000000
+}
+button:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: rgba(25, 170, 173, 1)
+  transition:400ms ease all;
+}
+button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+button:hover:before,button:hover:after{
+  width:100%;
+  transition:800ms ease all;
 }
 
-#sub:before, #sub:after {
-  width: 0;
-  height: 3px;
-  content: " ";
-  background-color: #F44336;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transition: all 0.3s ease;
-  -webkit-transition: all 0.3s ease;
-  -moz-transition: all 0.3s ease;
-  -o-transition: all 0.3s ease;
-  -ms-transition: all 0.3s ease;
-}
-#sub:after {
-  top: 100%;
-}
-#sub:hover {
-  letter-spacing: 8px;
-  color: #F44336;
-}
-#sub:hover:before, #sub:hover:after {
-  width: 100%;
-  left: 0;
-}
-#sub:hover:after {
-  width: 100%;
-  left: 0;
-}
+

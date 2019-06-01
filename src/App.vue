@@ -19,9 +19,10 @@ export default {
 }
 </script>
 
-<style>
+<style lang="stylus" scoped>
 #app {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height 100%
 }
 </style>
