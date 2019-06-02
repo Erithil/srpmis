@@ -23,7 +23,7 @@
 					</label>
 			</div>
 	  	<button class="btn" value="登录" name="login" @click="login">登录</button>
-			<span>没有账号？点击<a href="home.html">注册</a></span>	
+			<span>没有账号？点击<router-link :to="{name: 'Register'}">注册</router-link></span>	
   	</div>		
 	</form>
 </div>
@@ -46,17 +46,19 @@ export default {
 	},
 
   methods: {
-		login(){
-			
-			axios.get('@/@/static/saccount.json', {})
+		login(){	
+			axios.get('static/saccount.json', {})
 			.then(function (response) {
-				this.account = JSON.parse(response.data);
-				alert(this.account);
+				let temp = JSON.parse(JSON.stringify(response.data))['account'];
+				let u = this.loginform.user, p = this.loginform.pass, i = 0;
+
+				console.log(temp);
 			})
 			.catch(function (error) {
 					alert(error.response);
 			});
 		}
+
 	}
 }
 </script>
@@ -80,7 +82,7 @@ export default {
 	font-size 25px
 	font-weight 20px
 	color #ffffff
-	background #000000
+	background rgba(0, 0, 0, .6)
 	margin-bottom: 15px;
 	padding: 0;
 	text-align center

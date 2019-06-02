@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Register from '@/components/Register'
 import Login from '@/components/Login'
 import Home from '@/components/Home'
 import Pinfo from '@/components/home/Pinfo'
@@ -15,6 +16,11 @@ export default new Router({
       name: 'Login',
       component: Login
     },  
+    {
+      path: '/register',
+      name: 'Register',
+      component: Register
+    },
     {
       path: '/home',
       name: 'home',
