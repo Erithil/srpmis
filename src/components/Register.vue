@@ -5,16 +5,16 @@
 	</div>
 <form id="register-info">
 		<span>
-	  	<input class="clean-slide" type="text" v-model="registerform.user" placeholder="请输入账号、手机号或邮箱"/>
+	  	<input class="clean-slide" type="text" v-model="regForm.username" placeholder="请输入账号、手机号或邮箱"/>
 	  	<label for="account">账号</label>
 	  </span>
 	  <span>
-	  	<input class="clean-slide" type="password" v-model="registerform.pass" placeholder="请输入密码"/>
+	  	<input class="clean-slide" type="password" v-model="regForm.userpsw" placeholder="请输入密码"/>
 	  	<label for="acode">密码</label>
 	  </span>
 		<span>
-	  	<input class="clean-slide" type="password" v-model="registerform.pass" placeholder="请再次输入密码"/>
-	  	<label for="acode">确认密码</label>
+	  	<input class="clean-slide" type="password" id="cf" placeholder="请再次输入密码"/>
+	  	<label for="bcode">确认密码</label>
 	  </span>
 	  <div class="click">
 			<div class="row">
@@ -33,31 +33,54 @@
 
 <script>
 import axios from 'axios'
+import VueAxios from 'vue-axios'
+import $ from 'jquery'
 
 export default {
 	
 	data(){
 		return {
-			registerform: {
-				user: '',
-				pass: ''
+			regForm: {
 			}
 		}
 	},
 
 	methods: {
-		register(){
-			axios.post('/static/saccount.json', {
-				"username": this.registerform.user,
-				"password": this.registerform.pass
-			})
-			.then(function (response) {
-				alert('success');
-			})
-			.catch(function (error) {
-					alert(error.response);
-			});
-		}
+		register: function(){	
+			var radio = document.getElementsByName('radio');
+			var userroot = null;
+			for(let i=0; i<radio.length; i++){
+				if(radio[i].checked==true) {
+					userroot = radio[i].value;
+					break;
+                }
+			}
+			if(this.regForm.username=='' || this.regForm.userpsw==''){
+				alert("账号密码不能为空");
+				return;
+			}
+			if(this.regForm.userpsw != this.regForm.psw ){
+				alert("两次密码输入不一致");
+				return;
+			}
+			var url="/api/register";
+			this.$http.post(url, {
+				username: this.regForm.username, 
+				userpsw: this.regForm.userpsw,
+				userroot: this.userroot
+			},{})
+			.then(function (data) {
+					console.log("请求成攻！ ",data.body);
+                var content=data.body;
+                if (content.length != 0) {
+                    alert("登录成功！");
+                }else{
+                    alert("账户密码错误！");
+                }
+            },function(response){
+                console.log(response);
+            });
+		},
 	}
 
 }

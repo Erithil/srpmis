@@ -2,10 +2,14 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Register from '@/components/Register'
 import Login from '@/components/Login'
-import Home from '@/components/Home'
-import Pinfo from '@/components/home/Pinfo'
-import Pdata from '@/components/home/Pdata'
-import Userm from '@/components/home/Userm'
+import Homet from '@/components/Homet'
+import Homes from '@/components/Homes'
+import Sinfo from '@/components/student/Sinfo'
+import Sdata from '@/components/student/Sdata'
+import Suser from '@/components/student/Suser'
+import Tinfo from '@/components/teacher/Tinfo'
+import Tdata from '@/components/teacher/Tdata'
+import Tuser from '@/components/teacher/Tuser'
 
 Vue.use(Router)
 
@@ -22,26 +26,49 @@ export default new Router({
       component: Register
     },
     {
-      path: '/home',
-      name: 'home',
-      component: Home,
+      path: '/homet',
+      name: 'homet',
+      component: Homet,
       children:[
-        {
-            path:'/home/',
-            name: 'Pinfo',
-            component: Pinfo
-        },
-        {
-            path:'/home/data',
-            name: 'Pdata',
-            component: Pdata
-        },
-        {
-            path:'/home/user',
-            name: 'Userm',
-            component: Userm
-        }
+      {
+          path:'home/',
+          name: 'Tinfo',
+          component: Tinfo
+      },
+      {
+          path:'home/Tdata',
+          name: 'Tdata',
+          component: Tdata
+      },
+      {
+          path:'home/Tuser',
+          name: 'Tuser',
+          component: Tuser
+      }
       ]
-    }
+    },
+    {
+      path: '/homes',
+      name: 'homes',
+      component: Homes,
+      children:[
+      {
+          path:'homes/',
+          name: 'Sinfo',
+          component: Sinfo
+      },
+      {
+          path:'home/Sdata',
+          name: 'Sdata',
+          component: Sdata
+      },
+      {
+          path:'home/Suser',
+          name: 'Suser',
+          component: Suser
+      }
+      ]
+    },
+
   ]
 })
