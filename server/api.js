@@ -50,7 +50,8 @@ router.post('/register', (req, res) => {
     var params = req.body; 
     console.log("sql",sql);
     console.log("params",params);
-    conn.query(sql, [params.username,params.userpsw,params.userroot], function(err, result) {    
+    conn.query(sql, [params.username,params.userpsw,params.userroot], 
+        function(err, result) {    
         if (err) {       
             console.log(err);
         }        
@@ -69,9 +70,98 @@ router.post('/register', (req, res) => {
 });
 
 //查询
+router.post('/search', (req, res) => {
+    var sql = $sql.user.search;    
+    var params = req.body; 
+    console.log("sql",sql);
+    console.log("params",params);
+    conn.query(sql, 
+        [params.sepname,], 
+        function(err, result) {    
+        if (err) {       
+            console.log(err);
+        }        
+        if (result) {
+            res.send(JSON.stringify(result));
+        }
+            res.end('is over');
+        })
+});
 
 //添加
+router.post('/add', (req, res) => {
+    var sql = $sql.user.add;    
+    var params = req.body; 
+    console.log("sql",sql);
+    console.log("params",params);
+    conn.query(sql, 
+        [params.pid, params.pdep, params.pname, params.plead, params.psta, params.plday,], 
+        function(err, result) {    
+        if (err) {       
+            console.log(err);
+        }        
+        if (result) {
+            jsonWrite(res, result);
+            for(var i = 0; i < result.length; i++){
+                console.log("请求回来！",result[i])
+                console.log("请求结果！",typeof result[i],result[i].proname);
+                if (result[i].proname == params.pname) {
+                    res.send("success");
+                }
+            }
+            res.end('is over');
+        }
+    })
+});
 
-//删除
+//我的项目
+router.post('/tmain', (req, res) => {
+    var sql = $sql.user.tmain;    
+    var params = req.body; 
+    console.log("sql",sql);
+    console.log("params",params);
+    conn.query(sql, 
+        [params.plead,], 
+        function(err, result) {    
+        if (err) {       
+            console.log(err);
+        }        
+        if (result) {
+            res.send(JSON.stringify(result));
+        }
+        res.end('is over');
+    })
+});
+
+
+//修改、删除
+
+
+
+//用户信息
+router.post('/myinfo', (req, res) => {
+    var sql = $sql.user.myinfo;    
+    var params = req.body; 
+    console.log("sql",sql);
+    console.log("params",params);
+    conn.query(sql, 
+        [params.myid, params.myname, params.mytel, params.mygem, params.mymay,], 
+        function(err, result) {    
+        if (err) {       
+            console.log(err);
+        }        
+        if (result) {
+            jsonWrite(res, result);
+            for(var i = 0; i < result.length; i++){
+                console.log("请求回来！",result[i])
+                console.log("请求结果！",typeof result[i],result[i].username);
+                if (result[i].username == params.myid) {
+                    res.send("success");
+                }
+            }
+            res.end('is over');
+        }
+    })
+});
 
 module.exports = router;

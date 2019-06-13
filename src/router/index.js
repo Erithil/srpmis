@@ -10,6 +10,8 @@ import Suser from '@/components/student/Suser'
 import Tinfo from '@/components/teacher/Tinfo'
 import Tdata from '@/components/teacher/Tdata'
 import Tuser from '@/components/teacher/Tuser'
+import Tadd from '@/components/teacher/Tadd'
+import Tdatam from '@/components/teacher/Tdatam.vue'
 
 Vue.use(Router)
 
@@ -31,17 +33,29 @@ export default new Router({
       component: Homet,
       children:[
       {
-          path:'home/',
+          path:'homet/:uname',
           name: 'Tinfo',
           component: Tinfo
       },
       {
-          path:'home/Tdata',
+          path:'homet/Tdata/:uname',
           name: 'Tdata',
-          component: Tdata
+          component: Tdata,
+          children: [
+          {
+            path: 'homet/Tdatam/:uname',
+            name: 'Tdatam',
+            component: Tdatam,
+          },
+          {
+            path: 'homet/Tdata/Tadd/:uname',
+            name: 'Tadd',
+            component: Tadd,
+          },
+          ]
       },
       {
-          path:'home/Tuser',
+          path:'homet/Tuser/:uname',
           name: 'Tuser',
           component: Tuser
       }
@@ -58,12 +72,12 @@ export default new Router({
           component: Sinfo
       },
       {
-          path:'home/Sdata',
+          path:'homes/Sdata',
           name: 'Sdata',
           component: Sdata
       },
       {
-          path:'home/Suser',
+          path:'homes/Suser',
           name: 'Suser',
           component: Suser
       }

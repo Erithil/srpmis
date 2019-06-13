@@ -1,22 +1,13 @@
 <template>
     <div class="info">
         <div class="search">
-         <input class="search__input" type="text" placeholder="Search">
-         <button class="btn" type="submit">搜索</button>
-         <p>welcome!{{this.$route.params.uname}}</p>
+         <input class="search__input" type="text" placeholder="输入项目名字查询" v-model="seek.sear"/>
+         <button class="btn" type="submit" @click="lookfor">搜索</button>
         </div>
-        <div class="search">
-         <input class="search__input" type="text" placeholder="Search">
-         <button class="btn" type="submit">添加</button>
+        <div class="main">
         </div>
-        <div class="content">
-             <ul class="content-list">
-                <li>项目名称</li>
-                <li>负责人</li>
-                <li>状态</li>
-                <li>创立日期</li>
-             </ul>
-        </div>
+
+        
     </div>
 </template>
 <script>
@@ -24,8 +15,32 @@
 export default {
     data(){
         return{
-            
+            seek: {}
         }
+    },
+
+    methods: {
+        lookfor: function(){
+            var url = 'api/search';
+            this.$http.post(url, {
+                sepname: this.seek.sear,             
+                },{})
+                .then(function (data) {
+                    var content=data.body;
+                    if (content.length != 0) {
+                        var result = content;
+                        var para=document.createElement('div');
+                        var node=document.createTextNode('result');//创建一个文本节点
+                        para.appendChild(node);//追加此文本节点
+
+                    }else{
+                        alert("失败！");
+                    }
+                },function(response){
+                    console.log(response);
+                });
+        }
+
     }
 
 }

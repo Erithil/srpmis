@@ -2,14 +2,25 @@
     <div class="container">
         <div class="nav">
             <ul class="nav-list">
-                <li><router-link :to="{name: 'Pinfo'}" class="navs">项目信息</router-link></li>
-                <li><router-link :to="{name: 'Pdata'}" class="navs">项目数据</router-link></li>
-                <li><router-link :to="{name: 'Userm'}" class="navs">用户管理</router-link></li>
+                <li><p>欢迎!{{this.$route.params.uname}}</p></li>
+                <li><router-link :to="{name: 'Tinfo'}" class="navs">项目信息</router-link></li>
+                <li><router-link :to="{name: 'Tdata'}" class="navs">项目管理</router-link></li>
+                <li><router-link :to="{name: 'Tuser'}" class="navs">用户管理</router-link></li>
             </ul>
         </div>
         <router-view />
     </div>
 </template>
+
+<script>
+export default {
+    methods:{
+        
+    }
+}
+</script>
+
+
 
 <style lang="stylus" scoped>
 .container{

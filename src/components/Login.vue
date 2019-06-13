@@ -5,13 +5,13 @@
 	</div>
 	<form id="login-info">
 		<span>
-	  	<input class="clean-slide" type="text" v-model="loginForm.username" placeholder="请输入账号、手机号或邮箱"/>
-	  	<label for="account">账号</label>
-	  </span>
-	  <span>
-	  	<input class="clean-slide" type="password"  v-model="loginForm.userpsw" placeholder="请输入密码"/>
-	  	<label for="acode">密码</label>
-	  </span>
+			<input class="clean-slide" type="text" v-model="loginForm.username" placeholder="请输入账号、手机号或邮箱"/>
+			<label for="account">账号</label>
+	  	</span>
+		<span>
+			<input class="clean-slide" type="password"  v-model="loginForm.userpsw" placeholder="请输入密码"/>
+			<label for="acode">密码</label>
+		</span>
 	  <div class="click">
 	  	<a id="fg" href="#">忘记密码?</a>
 			<div class="row">
@@ -47,6 +47,7 @@ export default {
   methods: {
 
 		verify: function(){	
+			//获取权限
 			var radio = document.getElementsByName('radio');
 			var userroot = null;
 			for(let i=0; i<radio.length; i++){
@@ -55,7 +56,7 @@ export default {
 					break;
                 }
 			}
-			console.log(this.loginForm);
+			//验证
 			var url="/api/login";
 			this.$http.post(url, {
 				username: this.loginForm.username, 
@@ -63,7 +64,7 @@ export default {
 				userroot: this.userroot
 			},{})
 			.then(function (data) {
-                var content=data.body;
+				var content=data.body;
                 if (content.length != 0) {
 					if(userroot == 'student')
 					{
