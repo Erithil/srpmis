@@ -68,7 +68,7 @@ export default {
                 if (content.length != 0) {
 					if(userroot == 'student')
 					{
-						this.$router.push({name: 'Pinfo', params:{uname: this.loginForm.username,uroot: userroot}});
+						this.$router.push({name: 'Sinfo', params:{uname: this.loginForm.username,uroot: userroot}});
 					}else if(userroot == 'teacher') {
 						this.$router.push({name: 'Tinfo', params:{uname: this.loginForm.username,uroot: userroot}});
 					}

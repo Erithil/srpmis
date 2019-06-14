@@ -13,7 +13,7 @@
 	  	<label for="acode">密码</label>
 	  </span>
 		<span>
-	  	<input class="clean-slide" type="password" id="cf" placeholder="请再次输入密码"/>
+	  	<input class="clean-slide" type="password" v-model="regForm.psw" placeholder="请再次输入密码"/>
 	  	<label for="bcode">确认密码</label>
 	  </span>
 	  <div class="click">
@@ -51,7 +51,7 @@ export default {
 			var userroot = null;
 			for(let i=0; i<radio.length; i++){
 				if(radio[i].checked==true) {
-					userroot = radio[i].value;
+					userroot = radio[i].value;					
 					break;
                 }
 			}
@@ -62,24 +62,25 @@ export default {
 			if(this.regForm.userpsw != this.regForm.psw ){
 				alert("两次密码输入不一致");
 				return;
+			} else {
+				var url="/api/register";
+				console.log(this.userroot)
+				this.$http.post(url, {
+					username: this.regForm.username, 
+					userpsw: this.regForm.userpsw,
+					userroot: userroot
+				},{})
+				.then(function (data) {
+					var content=data.body;
+					if (content.length != 0) {
+						alert("注册成功！");
+					}else{
+						alert("注册错误！");
+					}
+				},function(response){
+					console.log(response);
+				});
 			}
-			var url="/api/register";
-			this.$http.post(url, {
-				username: this.regForm.username, 
-				userpsw: this.regForm.userpsw,
-				userroot: this.userroot
-			},{})
-			.then(function (data) {
-					console.log("请求成攻！ ",data.body);
-                var content=data.body;
-                if (content.length != 0) {
-                    alert("登录成功！");
-                }else{
-                    alert("账户密码错误！");
-                }
-            },function(response){
-                console.log(response);
-            });
 		},
 	}
 

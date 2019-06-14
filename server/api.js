@@ -84,7 +84,7 @@ router.post('/search', (req, res) => {
         if (result) {
             res.send(JSON.stringify(result));
         }
-            res.end('is over');
+        res.end(JSON.stringify(result));
         })
 });
 
@@ -129,13 +129,58 @@ router.post('/tmain', (req, res) => {
         if (result) {
             res.send(JSON.stringify(result));
         }
-        res.end('is over');
+        res.end(JSON.stringify(result));
     })
 });
 
 
-//修改、删除
+//修改
 
+
+//删除
+router.post('/del', (req, res) => {
+    var sql = $sql.user.del;    
+    var params = req.body; 
+    console.log("sql",sql);
+    console.log("params",params);
+    conn.query(sql, 
+        [params.pid,], 
+        function(err, result) {    
+        if (err) {       
+            console.log(err);
+        }        
+        if (result) {
+            jsonWrite(res, result);
+            for(var i = 0; i < result.length; i++){
+                console.log("请求回来！",result[i])
+                console.log("请求结果！",typeof result[i],result[i].proid);
+                if (result[i].proid == params.id) {
+                    res.send("success");
+                }
+            }
+            res.end('is over');
+        }
+    })
+});
+
+//我的项目
+router.post('/tmain', (req, res) => {
+    var sql = $sql.user.tmain;    
+    var params = req.body; 
+    console.log("sql",sql);
+    console.log("params",params);
+    conn.query(sql, 
+        [params.plead,], 
+        function(err, result) {    
+        if (err) {       
+            console.log(err);
+        }        
+        if (result) {
+            res.send(JSON.stringify(result));
+        }
+        res.end(JSON.stringify(result));
+    })
+});
 
 
 //用户信息
@@ -145,7 +190,7 @@ router.post('/myinfo', (req, res) => {
     console.log("sql",sql);
     console.log("params",params);
     conn.query(sql, 
-        [params.myid, params.myname, params.mytel, params.mygem, params.mymay,], 
+        [params.myid, params.myname, params.mytel, params.myem, params.mymay,], 
         function(err, result) {    
         if (err) {       
             console.log(err);
@@ -161,6 +206,24 @@ router.post('/myinfo', (req, res) => {
             }
             res.end('is over');
         }
+    })
+});
+
+router.post('/nowinfo', (req, res) => {
+    var sql = $sql.user.nowinfo;    
+    var params = req.body; 
+    console.log("sql",sql);
+    console.log("params",params);
+    conn.query(sql, 
+        [params.username,], 
+        function(err, result) {    
+        if (err) {       
+            console.log(err);
+        }        
+        if (result) {
+            res.send(JSON.stringify(result));
+        }
+        res.end(JSON.stringify(result));
     })
 });
 

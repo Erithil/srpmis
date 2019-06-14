@@ -1,99 +1,103 @@
 <template>
-<div class="myform">
-        <div class="header">我的信息</div>
-        <span>
-            <input class="clean-slide" type="text" v-model="mydata.myid" />
-            <label>账号ID</label>
-        </span>
-        <span>
-            <input class="clean-slide" type="text" v-model="mydata.myname" />
-            <label>姓名</label>
-        </span>
-        <span>
-            <input class="clean-slide" type="text" v-model="mydata.mytel" />
-            <label>手机号码</label>
-        </span>
-        <span>
-            <input class="clean-slide" type="text" v-model="mydata.myem" />
-            <label>e-mail</label>
-        </span>
-        <span>
-            <input class="clean-slide" type="text" v-model="mydata.mymay" />
-            <label>学院</label>
-        </span>
-         <div class="ctrl">
-            <button class="btn" type="submit" @click="addinfo">提交</button>           
+    <div class="data">
+        <table id="myinfo">
+        </table>
+        <div class="search">
+            <button class="btn" type="submit" @click="add">录入信息</button>          
         </div>
-</div>
-</template>
+        <div>
+            <router-view />
+        </div>
+    </div>
 
+</template>
 <script>
-import axios from 'axios'
-import VueAxios from 'vue-axios'
-import $ from 'jquery'
 
 export default {
     data(){
-		return {
-			mydata: {
-			}
-		}
+        return{
+            
+        }
+    },
+
+    mounted(){
+        this.now()
     },
 
     methods: {
-        addinfo: function(){
-            if(this.mydata.myid =='' || this.mydata.myname=='' || this.mydata.mytel=='' || this.mydata.myem=='' || this.mydata.mymay==''){
-                alert("不能有空值")
-            } else {
-                //传值
-                var url = '/api/myinfo'
-                this.$http.post(url, {
-                    myid: this.mydata.myid,                
-                    myname: this.mydata.myname, 
-                    mytel: this.mydata.mytel,
-                    myem: this.mydata.myem,
-                    mymay: this.mydata.mymay,                
+        add: function(){
+            this.$router.push({name: 'Tuseradd'});
+        }
+    },
+        now: function(){
+            var url = 'api/nowinfo';
+            this.$http.post(url, {
+                    username: this.$route.params.uname,             
                 },{})
                 .then(function (data) {
                     var content=data.body;
-                    if (content.length != 0) {
-                        alert("添加成功")
-                    }else{
-                        alert("添加失败！");
+                    var table = document.getElementById('myinfo');
+                    if (content.length != 0) {                       
+                        for(let i=0;i<content.length;i++){
+                            var tr = document.createElement('tr');
+                            //每一行
+                            var td1 = document.createElement('td')
+                            td1.innerHTML = select + content[i].username;
+                            tr.appendChild(td1);
+                            var td2 = document.createElement('td')
+                            td2.innerHTML = content[i].myname;
+                            tr.appendChild(td2);
+                            var td3 = document.createElement('td')
+                            td3.innerHTML = content[i].tel;
+                            tr.appendChild(td3);
+                            var td4 = document.createElement('td')
+                            td4.innerHTML = content[i].email;
+                            tr.appendChild(td4);   
+                            var td5 = document.createElement('td')
+                            td5.innerHTML = content[i].mayjor;
+                            tr.appendChild(td5);
+                            table.appendChild(tr);
+                        }
+
+                            console.log(content)                     
+                    }else{                    
+                        alert("失败！");
                     }
                 },function(response){
                     console.log(response);
                 });
-            }
         }
-    }
+
 }
 </script>
 
 <style lang="stylus" scoped>
-.header{
-    text-align center
-    font-size 18px
-    margin-right 10%
-    margin-top 5%
+.data{
+    float left
+    margin-left 20px
+    margin-top 10px
+    width 85%
+    height 95%
 }
-.myform span {
-    position: relative;
-    display: block;
-    margin: 55px 40%;
-  }
-.row{
-	width 100%
-	margin-left 40%
-	margin-bottom 20px
-	label{
-		display inline-block
-	}
+.Search{
+    margin-top 100px
 }
-.ctrl{
-    margin-left 45%
-    button{
-        margin 10px
-    }
+.content{
+    border solid
+    border-width 1px
+    width 80%
+    height 90%
+    margin-top 20px
+    margin-left 40px
+}
+.content-list{
+    list-style none
+}
+.content-list li{
+    display inline-block
+    margin-right 20px    
 }
 </style>
+
+
+</template>
