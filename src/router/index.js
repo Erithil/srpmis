@@ -1,9 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+//登录注册
 import Register from '@/components/Register'
 import Login from '@/components/Login'
+//主页
 import Homet from '@/components/Homet'
 import Homes from '@/components/Homes'
+
 import Sinfo from '@/components/student/Sinfo'
 import Sdata from '@/components/student/Sdata'
 import Suser from '@/components/student/Suser'
@@ -14,6 +17,9 @@ import Tuser from '@/components/teacher/Tuser'
 import Tuseradd from '@/components/teacher/Tuseradd'
 import Tadd from '@/components/teacher/Tadd'
 import Tdatam from '@/components/teacher/Tdatam.vue'
+//搜索用户
+import Tseek from '@/components/teacher/Tseek'
+import Sseek from '@/components/student/Sseek'
 
 Vue.use(Router)
 
@@ -62,9 +68,14 @@ export default new Router({
           component: Tuser,
           children: [
             {
-              path:'homes/Tuser/add:uname',
+              path:'homes/Tuser/add/:uname',
               name: 'Tuseradd',
               component: Tuseradd,
+            },
+            {
+              path:'homes/Tuser/seek/:uname',
+              name: 'Tseek',
+              component: Tseek,
             }
           ]
       }
@@ -81,19 +92,24 @@ export default new Router({
           component: Sinfo
       },
       {
-          path:'homes/Sdata:uname',
+          path:'homes/Sdata/:uname',
           name: 'Sdata',
           component: Sdata
       },
       {
-          path:'homes/Suser:uname',
+          path:'homes/Suser/:uname',
           name: 'Suser',
           component: Suser,
           children: [
             {
-              path:'homes/Suser/add:uname',
+              path:'homes/Suser/add/:uname',
               name: 'Suseradd',
               component: Suseradd,
+            },
+            {
+              path:'homes/Suser/seek/:uname',
+              name: 'Sseek',
+              component: Sseek,
             }
           ]
       },

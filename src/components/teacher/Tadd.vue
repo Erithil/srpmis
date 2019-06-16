@@ -16,6 +16,18 @@
             <input class="clean-slide" type="text" v-model="pdata.plead" />
             <label>导师ID</label>
         </span>
+        <span>
+            <input class="clean-slide" type="text" v-model="pdata.pstu1" />
+            <label>组长ID</label>
+        </span>
+        <span>
+            <input class="clean-slide" type="text" v-model="pdata.pstu2" />
+            <label>组员ID</label>
+        </span>
+        <span>
+            <input class="clean-slide" type="text" v-model="pdata.pstu3" />
+            <label>组员ID</label>
+        </span>
         <div class="row">
             <p>项目状态：</p>
 			<label>
@@ -78,7 +90,10 @@ export default {
                     pname: this.pdata.pname,
                     plead: this.pdata.plead,
                     psta: status,
-                    plday: lday,                   
+                    plday: lday,
+                    pstu1: this.pdata.pstu1,
+                    pstu2: this.pdata.pstu2, 
+                    pstu3: this.pdata.pstu3,                    
                 },{})
                 .then(function (data) {
                     var content=data.body;
@@ -100,18 +115,18 @@ export default {
 .addform span {
     position: relative;
     display: block;
-    margin: 55px 185px;
+    margin: 35px 30%;
   }
 .row{
 	width 100%
-	margin-left 20%
-	margin-bottom 20px
+	margin-left 30%
+	margin-bottom 5px
 	label{
 		display inline-block
 	}
 }
 .ctrl{
-    margin-left 20%
+    margin-left 30%
     button{
         margin 10px
     }

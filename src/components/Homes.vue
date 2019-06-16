@@ -4,6 +4,7 @@
             <ul class="nav-list">
                 <li><p>欢迎!{{this.$route.params.uname}}</p></li>
                 <li><router-link :to="{name: 'Sinfo'}" class="navs">项目信息</router-link></li>
+                <li><router-link :to="{name: 'Sdata'}" class="navs">我的项目</router-link></li>
                 <li><router-link :to="{name: 'Suser'}" class="navs">用户管理</router-link></li>
             </ul>
         </div>

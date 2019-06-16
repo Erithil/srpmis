@@ -87,6 +87,24 @@ router.post('/search', (req, res) => {
         res.end(JSON.stringify(result));
         })
 });
+//信息查询
+router.post('/seek', (req, res) => {
+    var sql = $sql.user.seek;    
+    var params = req.body; 
+    console.log("sql",sql);
+    console.log("params",params);
+    conn.query(sql, 
+        [params.seekname,], 
+        function(err, result) {    
+        if (err) {       
+            console.log(err);
+        }        
+        if (result) {
+            res.send(JSON.stringify(result));
+        }
+        res.end(JSON.stringify(result));
+        })
+});
 
 //添加
 router.post('/add', (req, res) => {
@@ -115,6 +133,7 @@ router.post('/add', (req, res) => {
 });
 
 //我的项目
+//教师
 router.post('/tmain', (req, res) => {
     var sql = $sql.user.tmain;    
     var params = req.body; 
@@ -132,10 +151,50 @@ router.post('/tmain', (req, res) => {
         res.end(JSON.stringify(result));
     })
 });
+//学生
+router.post('/smain', (req, res) => {
+    var sql = $sql.user.smain;    
+    var params = req.body; 
+    console.log("sql",sql);
+    console.log("params",params);
+    conn.query(sql, 
+        [params.stuname1, params.stuname2, params.stuname3, ], 
+        function(err, result) {    
+        if (err) {       
+            console.log(err);
+        }        
+        if (result) {
+            res.send(JSON.stringify(result));
+        }
+        res.end(JSON.stringify(result));
+    })
+});
 
 
 //修改
-
+router.post('/change',(req, res) => {
+    var sql = $sql.user.change;
+    var params = req.body;
+    console.log("sql",sql);
+    console.log("params",params);
+    conn.query(sql,[params.psta, params.pid], 
+    function(err, result){
+    if (err){
+        console.log(err);
+    }
+    if(result){
+        jsonWrite(res, result);
+        for(var i = 0; i < result.length; i++){
+            console.log("请求回来！",result[i])
+            console.log("请求结果！",typeof result[i],result[i].proid);
+            if (result[i].proid == params.id) {
+                res.send("success");
+            }
+        }
+        res.end('is over');
+    }
+    })
+})
 
 //删除
 router.post('/del', (req, res) => {
@@ -209,13 +268,13 @@ router.post('/myinfo', (req, res) => {
     })
 });
 
-router.post('/nowinfo', (req, res) => {
-    var sql = $sql.user.nowinfo;    
+router.post('/seekinfo', (req, res) => {
+    var sql = $sql.user.seekinfo;    
     var params = req.body; 
     console.log("sql",sql);
     console.log("params",params);
     conn.query(sql, 
-        [params.username,], 
+        [params.uid,], 
         function(err, result) {    
         if (err) {       
             console.log(err);

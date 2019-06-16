@@ -11,8 +11,15 @@
         </table>
 
  
-        <button class="btn" type="submit">修改状态</button>
-        <button class="btn" type="submit" @click="del">删除</button>
+        <button class="btn" type="submit" @click="changeSta">修改状态</button>
+        <select id="select">
+            <option value="未开始">未开始</option>
+            <option value="进行中">进行中</option>
+            <option value="已结题">已结题</option>
+        </select>
+        <div id="delete">
+            <button class="btn" type="submit" @click="del">删除</button>
+        </div>
     </div>
 </template>
 
@@ -91,13 +98,44 @@ export default {
                 if (content.length != 0) {
                     alert("删除成功，请刷新")
                 }else{
-                    alert("账户密码错误！");
+                    alert("错误！");
                 }
             },function(response){
                 console.log(response);
             });
 
-		},
+        },
+        
+        changeSta: function(){
+            //获取修改的项目id
+            var sel = document.getElementsByClassName('sel');
+            var whi =  null;  
+            for(let k=0; k<sel.length; k++){
+                if(sel[k].checked==true) {
+                    whi = sel[k].value;
+                }
+            }
+            //获取修改
+            var select = document.getElementById('select');
+            var index = select.selectedIndex;
+            var changetext = select.options[index].text
+            console.log(changetext)
+            var url="/api/change";
+			this.$http.post(url, {
+                pid: whi,
+                psta: changetext,
+			},{})
+			.then(function (data) {
+				var content=data.body;
+                if (content.length != 0) {
+                    alert("修改成功，请刷新")
+                }else{
+                    alert("错误！");
+                }
+            },function(response){
+                console.log(response);
+            });
+        }
             
     }
 }
@@ -106,18 +144,17 @@ export default {
 <style lang="stylus" scoped>
 #prodata{
     text-align left
-    border solid
+
     border-width 1px
     font-size 17px
     margin 20px
     tr{
         line-height 30px
     }
-    th{
-        color #ffffff
-        background-color #19aaad
-        border solid
-        
-    }
+
+}
+
+#delete{
+    margin-top 20px
 }
 </style>
